@@ -1,0 +1,161 @@
+:root {
+  --ink: #0b2a42;
+  --ink-soft: #345064;
+  --paper: #f5f7f3;
+  --paper-bright: #fbfcfa;
+  --green: #2f7652;
+  --green-bright: #4c9a70;
+  --green-pale: #dce9e0;
+  --rule: #cbd9d2;
+  --orange: #e66a2c;
+  --white: #fff;
+  --shadow: 0 18px 44px rgba(11, 42, 66, .11);
+  --display: "Zen Old Mincho", "Yu Mincho", serif;
+  --body: "Zen Kaku Gothic New", "Yu Gothic", sans-serif;
+  --max: 1440px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open { overflow: hidden; }
+
+::selection { color: var(--white); background: var(--green); }
+
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--green); border: 3px solid var(--paper); }
+
+a { color: inherit; text-underline-offset: .28em; }
+a, button, summary { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--green-bright);
+  outline-offset: 4px;
+}
+
+img { display: block; max-width: 100%; }
+svg { display: block; }
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 10px 16px;
+  color: var(--white);
+  background: var(--ink);
+  transform: translateY(-150%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 252, 250, .96);
+  border-bottom: 1px solid rgba(11, 42, 66, .12);
+  transition: box-shadow .25s ease;
+}
+.site-header.is-scrolled { box-shadow: 0 12px 30px rgba(11, 42, 66, .08); }
+
+.header-inner {
+  width: min(calc(100% - 48px), var(--max));
+  min-height: 82px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.16;
+  white-space: nowrap;
+}
+.brand img { width: 38px; height: 48px; object-fit: contain; }
+.brand span { font-size: 10px; letter-spacing: .04em; }
+.brand strong { font-family: var(--display); font-size: 16px; letter-spacing: 0; }
+
+.global-nav { display: flex; align-items: center; gap: clamp(18px, 2vw, 34px); }
+.global-nav > a:not(.header-cta) {
+  position: relative;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+.global-nav > a:not(.header-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -8px;
+  height: 2px;
+  background: var(--green);
+  transition: right .25s ease;
+}
+.global-nav > a:not(.header-cta):hover::after { right: 0; }
+
+.header-cta, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+.header-cta {
+  min-width: 182px;
+  padding: 18px 20px;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: 4px;
+}
+.header-cta svg, .button svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.menu-button { display: none; }
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 82px);
+  overflow: hidden;
+  background: var(--paper-bright);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(47, 118, 82, .035) 1px, transparent 1px);
+  background-size: 100% 44px;
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 83%, transparent);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 64px), var(--max));
+  min-height: calc(100svh - 126px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(390px, .78fr) minmax(720px, 1.4fr);
+  align-items: center;
+  gap: clamp(30px, 3vw, 68px);
+  padding: 64px 0 88px;
+}
+
